@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentine's Day Card</title>
+  <style>
+    /* Flower background with gradient */
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(45deg, #ff66b2, #ff4081);
+      background: url('https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMWtuMXJia3V4NHFjZjNxa2xjNWVqOGZoenJyZ21nbDJrcGs4ZXJseiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/PYbOADiFT2PCPsVroy/giphy.gif') no-repeat left bottom;
+      background-size: 20%; /* Resize the GIF */
+      font-family: 'Arial', sans-serif;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Animated Heart Shape */
+    .heart {
+      position: absolute;
+      width: 100px;
+      height: 90px;
+      margin-top: 10px;
+      animation: floatHeart 5s ease-in-out infinite;
+    }
+
+    .heart::before, .heart::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      width: 52px;
+      height: 80px;
+      border-radius: 50px 50px 0 0;
+      background: red;
+    }
+
+    .heart::before {
+      left: 50px;
+      transform: rotate(-45deg);
+      transform-origin: 0 100%;
+    }
+
+    .heart::after {
+      left: 0;
+      transform: rotate(45deg);
+      transform-origin: 100% 100%;
+    }
+
+    /* Floating Heart Animation */
+    @keyframes floatHeart {
+      0% {
+        transform: translate(-50%, -50%) scale(0.7) rotate(0deg);
+        opacity: 0.7;
+      }
+      50% {
+        transform: translate(-50%, -200px) scale(1.5) rotate(180deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(0.7) rotate(360deg);
+        opacity: 0.7;
+      }
+    }
+
+    /* Envelope Design */
+    .envelope {
+      width: 400px;
+      height: 250px;
+      background-color: #fff;
+      border: 2px solid #ff66b2;
+      border-radius: 10px;
+      position: relative;
+      transform: rotateX(-45deg);
+      cursor: pointer;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      transition: transform 0.5s ease-out;
+      z-index: 1;
+    }
+
+    .envelope.opened {
+      transform: rotateX(0deg);
+    }
+
+    /* Envelope Flaps (Top & Bottom) */
+    .flap-top, .flap-bottom {
+      background-color: #ff66b2;
+      height: 120px;
+      position: absolute;
+      left: 0;
+      right: 0;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .flap-top {
+      top: 0;
+      transform-origin: top;
+    }
+
+    .flap-bottom {
+      bottom: 0;
+      transform-origin: bottom;
+    }
+
+    /* Opening Flaps Animation */
+    .envelope.opened .flap-top {
+      transform: rotateX(180deg);
+    }
+
+    .envelope.opened .flap-bottom {
+      transform: rotateX(-180deg);
+    }
+
+    /* Message Styling */
+    .message {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #ff66b2;
+      font-size: 24px;
+      opacity: 0;
+      text-align: center;
+      transition: opacity 1s ease-out;
+      padding: 20px;
+      font-weight: bold;
+    }
+
+    .envelope.opened .message {
+      opacity: 1;
+    }
+
+    /* Envelope Seal (added to make it look like a real envelope) */
+    .seal {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #ff4081;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      border: 5px solid #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      z-index: 2;
+    }
+
+    /* Envelope Content */
+    .content {
+      padding: 40px;
+      margin-top: 100px;
+      font-size: 24px;
+      color: #ff4081;
+      text-align: center;
+      text-decoration: #ff4081;
+    }
+  </style>
+</head>
+<body>
+  <!-- Multiple Floating Hearts -->
+  <div class="heart" style="top: 5%; left: 5%;"></div>
+  <div class="heart" style="top: 15%; left: 20%;"></div>
+  <div class="heart" style="top: 25%; left: 40%;"></div>
+  <div class="heart" style="top: 35%; left: 60%;"></div>
+  <div class="heart" style="top: 45%; left: 80%;"></div>
+  <div class="heart" style="top: 55%; left: 10%;"></div>
+  <div class="heart" style="top: 65%; left: 30%;"></div>
+  <div class="heart" style="top: 75%; left: 50%;"></div>
+  <div class="heart" style="top: 85%; left: 70%;"></div>
+  <div class="heart" style="top: 95%; left: 90%;"></div>
+
+  <div class="envelope" onclick="openEnvelope()">
+    <div class="flap-top"></div>
+    <div class="flap-bottom"></div>
+    <div class="seal"></div>
+    <div class="message">Happy Valentine's Sunny!</div>
+    <div class="content">
+      <p>Sending love to youuuu ❣️</p>
+    </div>
+  </div>
+
+  <!-- Audio element for background music (Local file) -->
+  <audio id="myAudio" loop>
+    <!-- Make sure the file path is correct relative to your HTML file -->
+    <source src="blue (Official Music Video).mp3" type="audio/mp3">
+  </audio>
+
+  <script>
+    // Open the envelope and play the music when clicked
+    function openEnvelope() {
+      var envelope = document.querySelector('.envelope');
+      var audio = document.getElementById('myAudio');
+
+      // Toggle envelope opening
+      envelope.classList.toggle('opened');
+
+      // Play the audio when the envelope is opened
+      if (!audio.paused) {
+        audio.pause();
+      }
+      audio.play();
+    }
+
+    // Add a key event listener to trigger the envelope opening
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        openEnvelope();
+      }
+
+      // Add play/pause functionality with the "P" key
+      if (event.key === 'p' || event.key === 'P') {
+        var audio = document.getElementById('myAudio');
+        if (audio.paused) {
+          audio.play();
+        } else {
+          audio.pause();
+        }
+      }
+    });
+  </script>
+</body>
+</html>
